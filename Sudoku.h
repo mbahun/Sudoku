@@ -22,7 +22,7 @@ class Sudoku {
         bool InsertProblemValue(int cellIndex, int value);
         bool InsertProblemValuesFromArray(int* array);
         ResultStatus Solve(int** array, int& arrayLen, int& pathsTried);
-        void Create(int** array, int& arrayLen);
+        void Create(int** problemArray, int** solutionArray, int& arrayLen);
 
     private:
         Grid* _grid = nullptr;
