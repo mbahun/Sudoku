@@ -123,7 +123,7 @@ void Sudoku::Create(int** problemArray, int** solutionArray, int& arrayLen) {
 
     if (solutionArray != nullptr) {
         *solutionArray = new int[arrayLen];
-        memcpy(solutionArray, problemArray, arrayLen);
+        memcpy(*solutionArray, *problemArray, arrayLen*sizeof(int));
     }
 
     while(toRemove){
