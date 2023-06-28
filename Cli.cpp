@@ -181,6 +181,7 @@ void Cli::SudokuCreate(Grid::Size size) {
     int* array, arrayLen = 0;
     _sudoku = new Sudoku((Grid::Size)size);
 
+    //Create returns problem and a solution (if solutionArray != nullptr). 
     _sudoku->Create(&array, nullptr, arrayLen);
     CLEAR_SCREEN;
     Print(array, arrayLen, size);
