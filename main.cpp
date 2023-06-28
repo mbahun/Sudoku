@@ -1,10 +1,10 @@
 #include "Cli.h"
-#include <windows.h>
+#include <fstream>
 
 #ifdef _WIN32
     #include "windows.h"
 #elif __linux__
-    #include "time.h"
+    #define byte unsigned char
 #else 
     #error "OS not supported"
 #endif 
@@ -71,7 +71,14 @@ int interop(const std::string name, const byte *data, const int dataSize) {
 #elif __linux__
 
 int interop(const std::string name, const byte* data, const int dataSize) {
-    return 1;
+    std::ofstream file(name, std::ofstream::binary);
+    if(!file.is_open()){
+        return 4;
+    }
+
+    file.write((char*)data, dataSize);
+    file.close();
+    return 0;
 }
 
 #endif
