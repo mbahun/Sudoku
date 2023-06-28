@@ -113,19 +113,23 @@ void Sudoku::Scramble(int* a, int size){
 }
 
 
-void Sudoku::Create(int** array, int& arrayLen) {
+void Sudoku::Create(int** problemArray, int** solutionArray, int& arrayLen) {
     int pathsTried = 0, index = 0;
-    int toRemove = (int)(0.6 * _grid->GetCellsCount()); //Remove cca 60% of numbers
+    int toRemove = (int)(0.55 * _grid->GetCellsCount()); //Remove cca 55% of numbers
 
     do {
         Generate();
-    } while (Solve(array, arrayLen, pathsTried) != Solved);
+    } while (Solve(problemArray, arrayLen, pathsTried) != Solved);
 
+    if (solutionArray != nullptr) {
+        *solutionArray = new int[arrayLen];
+        memcpy(*solutionArray, *problemArray, arrayLen*sizeof(int));
+    }
 
     while(toRemove){
         index = GetRadnomValue(0, _grid->GetCellsCount() - 1);
-        if ((*array)[index]) {
-            (*array)[index] = 0;
+        if ((*problemArray)[index]) {
+            (*problemArray)[index] = 0;
             toRemove--;
         }
     }
